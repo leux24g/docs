@@ -8,6 +8,7 @@
   },
   "servers": [
     { "url": "https://sandbox.waftpay.io/api", "description": "Sandbox" },
+    { "url": "https://payments-api.dev.pockets-pay.com", "description": "Health" },
     { "url": "https://api.waftpay.io", "description": "Production" }
   ],
   "tags": [
@@ -20,21 +21,74 @@
   ],
   "security": [{ "bearerAuth": [] }],
   "paths": {
+    "/actuator/health": {
+      "get": {
+        "tags": ["Status"],
+        "summary": "API health",
+        "operationId": "getHealth",
+        "description": "Returns overall API health.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "enum": ["UP", "DOWN"] },
+                    "groups": { "type": "array", "items": { "type": "string" } }
+                  },
+                  "required": ["status"]
+                },
+                "examples": {
+                  "up": {
+                    "summary": "UP",
+                    "value": { "status": "UP", "groups": ["liveness", "readiness"] }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "/oauth/token": {
       "post": {
-        "tags": ["Authentication"],
-        "description": "Exchange client credentials for an access token.",
+        "tags": ["auth"],
+        "summary": "Get OAuth2 access token",
+        "operationId": "oauth-token",
+        "description": "Exchange **client_id** and **client_secret** for a short-lived **Bearer** token.\n\nOptional header **nonce** can be sent for request signing.",
+        "security": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "nonce",
+            "required": false,
+            "schema": { "type": "string", "example": "1234" },
+            "description": "Optional request nonce/signature helper"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/TokenRequest" },
+              "schema": {
+                "type": "object",
+                "required": ["grant_type", "client_id", "client_secret"],
+                "properties": {
+                  "grant_type": { "type": "string", "enum": ["client_credentials"] },
+                  "client_id":   { "type": "string" },
+                  "client_secret": { "type": "string", "format": "password" }
+                }
+              },
               "examples": {
-                "client_credentials": {
+                "clientCredentials": {
                   "value": {
                     "grant_type": "client_credentials",
-                    "client_id": "waft_123",
-                    "client_secret": "********"
+                    "client_id": "YOUR_CLIENT_ID",
+                    "client_secret": "YOUR_CLIENT_SECRET"
                   }
                 }
               }
@@ -43,16 +97,33 @@
         },
         "responses": {
           "200": {
-            "description": "Token response",
+            "description": "Access token",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/TokenResponse" }
+                "schema": {
+                  "type": "object",
+                  "required": ["access_token", "token_type", "expires_in"],
+                  "properties": {
+                    "access_token": { "type": "string", "description": "JWT" },
+                    "token_type":    { "type": "string", "example": "Bearer" },
+                    "expires_in":    { "type": "integer", "example": 3600 }
+                  }
+                },
+                "examples": {
+                  "ok": {
+                    "value": {
+                      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...snip",
+                      "token_type": "Bearer",
+                      "expires_in": 3600
+                    }
+                  }
+                }
               }
             }
           },
-          "400": { "$ref": "#/components/responses/BadRequest" }
-        },
-        "security": []
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Invalid credentials" }
+        }
       }
     },
 

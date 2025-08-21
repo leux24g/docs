@@ -3,35 +3,43 @@
   "theme": "mint",
   "name": "Waftpay Developer Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
+    "primary": "#4A6CF7",
+    "light": "#FBB040",
     "dark": "#15803D"
   },
   "favicon": "favicon.ico",
   "logo": {
-    "light": "dark.svg",
-    "dark": "dark.svg"
+    "light": "/public/logo/dark.svg",
+    "dark": "/public/logo/dark.svg"
   },
   "navbar": {
     "links": [
-      { "label": "Status", "href": "https://status.waftpay.io" },
       { "label": "Support", "href": "mailto:alex.njora@waftpay.io" }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.waftpay.io"
+      "href": "https://dashboard.dev.pockets-pay.com"
     }
   },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "API Guides",
         "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "index",
+              "/pages/intro/what-is-mobile-money",
+              "/pages/intro/what-you-should-know",
+              "/pages/intro/how-to-start",
+              "/pages/intro/going-live"
+            ]
+          },
           {
             "group": "Getting started",
             "pages": [
-              "index",
               "quickstart",
               "environments",
               "errors"
@@ -40,17 +48,18 @@
           {
             "group": "Webhooks",
             "pages": [
-              "webhooks/signing",
-              "webhooks/event-types"
+              "/pages/webhooks/signing",
+              "/pages/webhooks/event-types"
             ]
           },
           {
             "group": "SDKs & Tools",
             "pages": [
-              "sdks/node",
-              "sdks/python",
-              "sdks/php",
-              "sdks/postman"
+              "/pages/sdks/node",
+              "/pages/sdks/python",
+              "/pages/sdks/java",
+              "/pages/sdks/php",
+              "/pages/sdks/postman"
             ]
           }
         ]
@@ -58,6 +67,12 @@
       {
         "tab": "API reference",
         "groups": [
+          {
+            "group": "Health",
+            "pages": [
+              "api-reference/health"
+            ]
+          },
           {
             "group": "Authentication",
             "pages": [
@@ -101,11 +116,30 @@
     ],
     "global": {
       "anchors": [
-        { "anchor": "Dashboard", "href": "https://dashboard.waftpay.io", "icon": "gauge" },
-        { "anchor": "API Status", "href": "https://status.waftpay.io", "icon": "signal" },
-        { "anchor": "Community", "href": "https://community.waftpay.io", "icon": "users" }
+        {
+          "anchor": "Run in Postman",
+          "href": "https://app.postman.com/run-collection/YOUR_COLLECTION_ID?env=YOUR_ENV_ID",
+          "icon": "circle-play"
+        },
+        {
+          "anchor": "Support Discord",
+          "href": "https://community.waftpay.io",
+          "icon": "discord"
+        }
       ]
     }
+  },
+  "openapi": "/openapi/waftpay.json",
+  "api": {
+    "baseUrl": [
+      "https://payments-api.dev.pockets-pay.com"
+    ],
+    "auth": {
+      "method": "bearer",
+      "name": "Authorization",
+      "inputPrefix": "Bearer "
+    },
+    "playground": { "mode": "show" }
   },
   "footer": {
     "socials": {
