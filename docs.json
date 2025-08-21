@@ -34,34 +34,7 @@
               "index",
               "quickstart",
               "environments",
-              "authentication",
-              "idempotency-and-retries",
               "errors"
-            ]
-          },
-          {
-            "group": "Payments",
-            "pages": [
-              "payments/overview",
-              "payments/create-charge",
-              "payments/confirm-otp",
-              "payments/reconcile"
-            ]
-          },
-          {
-            "group": "Collections",
-            "pages": [
-              "collections/checkout-sessions",
-              "collections/webhooks"
-            ]
-          },
-          {
-            "group": "Remittance",
-            "pages": [
-              "remittance/overview",
-              "remittance/create-payout",
-              "remittance/confirm",
-              "remittance/reconcile"
             ]
           },
           {
