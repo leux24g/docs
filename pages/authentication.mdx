@@ -1,0 +1,14 @@
+---
+title: "Authentication"
+description: "OAuth2 client credentials and using Bearer tokens."
+---
+
+Waftpay uses **OAuth2 Client Credentials** to obtain a short-lived **Bearer** token.
+
+## Get a token
+
+    <CodeGroup>
+        ```bash cURL
+        curl -X POST https://sandbox.waftpay.io/api/oauth/token \
+        -H "Content-Type: application/json" \
+        -d '{"grant_type":"client_credentials","client_id":"YOUR_CLIENT_ID","client_secret":"YOUR_CLIENT_SECRET"}'

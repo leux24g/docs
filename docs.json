@@ -1,13 +1,28 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Pockets Pay Test",
+  "name": "Waftpay Developer Docs",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
   "favicon": "https://waftpay.io/images/logo/logo.svg",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      { "label": "Status", "href": "https://status.waftpay.io" },
+      { "label": "Support", "href": "mailto:devrel@waftpay.io" }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://dashboard.waftpay.io"
+    }
+  },
   "navigation": {
     "tabs": [
       {
@@ -18,31 +33,51 @@
             "pages": [
               "index",
               "quickstart",
-              "development"
+              "environments",
+              "authentication",
+              "idempotency-and-retries",
+              "errors"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Payments",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "payments/overview",
+              "payments/create-charge",
+              "payments/confirm-otp",
+              "payments/reconcile"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Collections",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "collections/checkout-sessions",
+              "collections/webhooks"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Remittance",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "remittance/overview",
+              "remittance/create-payout",
+              "remittance/confirm",
+              "remittance/reconcile"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "webhooks/signing",
+              "webhooks/event-types"
+            ]
+          },
+          {
+            "group": "SDKs & Tools",
+            "pages": [
+              "sdks/node",
+              "sdks/python",
+              "sdks/php",
+              "sdks/postman"
             ]
           }
         ]
@@ -51,18 +86,41 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Authentication",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/auth/oauth-token"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Payments",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/payments/create",
+              "api-reference/payments/list",
+              "api-reference/payments/retrieve",
+              "api-reference/payments/confirm",
+              "api-reference/payments/cancel"
+            ]
+          },
+          {
+            "group": "Collections",
+            "pages": [
+              "api-reference/collections/checkout-sessions-create"
+            ]
+          },
+          {
+            "group": "Remittance",
+            "pages": [
+              "api-reference/remittance/payouts-create",
+              "api-reference/remittance/payouts-list",
+              "api-reference/remittance/payouts-retrieve",
+              "api-reference/remittance/payouts-confirm",
+              "api-reference/remittance/payouts-cancel"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "api-reference/webhooks/receive"
             ]
           }
         ]
@@ -70,58 +128,20 @@
     ],
     "global": {
       "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
+        { "anchor": "Dashboard", "href": "https://dashboard.waftpay.io", "icon": "gauge" },
+        { "anchor": "API Status", "href": "https://status.waftpay.io", "icon": "signal" },
+        { "anchor": "Community", "href": "https://community.waftpay.io", "icon": "users" }
       ]
     }
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+  "footer": {
+    "socials": {
+      "x": "https://x.com/waftpay",
+      "github": "https://github.com/waftpay",
+      "linkedin": "https://www.linkedin.com/company/waftpay"
     }
   },
   "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    "options": ["copy", "view", "chatgpt", "claude", "perplexity", "mcp", "cursor", "vscode"]
   }
 }

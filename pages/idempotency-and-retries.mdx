@@ -1,0 +1,10 @@
+---
+title: "Idempotency & Retries"
+description: "Prevent duplicate charges and implement safe retries."
+---
+
+## Idempotency-Key
+
+For **create** operations (payments, payouts, checkout sessions), send a unique:
+```http
+Idempotency-Key: 7f7b2c0e-4b52-4b1f-9b9a-9f4b2b1d0001
