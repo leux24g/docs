@@ -1,14 +1,15 @@
 ---
 title: "Authentication"
-description: "OAuth2 client credentials and using Bearer tokens."
+description: "Generate a Waftpay access token."
 ---
 
-Waftpay uses **OAuth2 Client Credentials** to obtain a short-lived **Bearer** token.
+You need a **Bearer access token** to call the Waftpay API.
 
-## Get a token
+## Steps
+1. In the **Waftpay Dashboard**, create a **Client ID** and **Client Secret** (use Sandbox first).
+2. Exchange them for a short-lived token:
 
-    <CodeGroup>
-        ```bash cURL
-        curl -X POST https://sandbox.waftpay.io/api/oauth/token \
-        -H "Content-Type: application/json" \
-        -d '{"grant_type":"client_credentials","client_id":"YOUR_CLIENT_ID","client_secret":"YOUR_CLIENT_SECRET"}'
+```bash
+curl -X POST https://sandbox.waftpay.io/api/oauth/token \
+  -H "Content-Type: application/json" \
+  -d '{"grant_type":"client_credentials","client_id":"YOUR_CLIENT_ID","client_secret":"YOUR_CLIENT_SECRET"}'
